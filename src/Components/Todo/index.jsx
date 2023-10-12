@@ -11,6 +11,7 @@ const Todo = () => {
   });
 
   const [incomplete, setIncomplete] = useState([]);
+  const [showCompleted, setShowCompleted] = useState(true);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {

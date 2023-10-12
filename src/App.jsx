@@ -2,6 +2,7 @@ import React from 'react';
 export const ItemContext = React.createContext(null);
 import {useState} from 'react';
 import Todo from './Components/Todo';
+import List from './Components/List';
 
 const App =() => {
     const [list, setList] = useState([
@@ -29,6 +30,7 @@ const App =() => {
       <ItemContext.Provider value={{list, setList}}>
         {/* <Header /> */}
         <Todo />
+        <List />
         {/* <Footer /> */}
       </ItemContext.Provider>
     );
