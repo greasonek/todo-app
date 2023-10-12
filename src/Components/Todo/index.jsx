@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
-
+import { ItemContext } from '../../App';
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
 
+  const { list, setList } = useContext(ItemContext)
   const [defaultValues] = useState({
     difficulty: 4,
   });
-  const [list, setList] = useState([]);
+
   const [incomplete, setIncomplete] = useState([]);
+  const [showCompleted, setShowCompleted] = useState(true);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -38,6 +40,7 @@ const Todo = () => {
   }
 
   useEffect(() => {
+
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
@@ -49,9 +52,9 @@ const Todo = () => {
   return (
     <>
       <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
+        <h1 data-testid="todo-h1">To Do List: {incomplete.length} items pending</h1>
       </header>
-
+  
       <form onSubmit={handleSubmit}>
 
         <h2>Add To Do Item</h2>
