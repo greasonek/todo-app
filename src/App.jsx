@@ -1,15 +1,40 @@
 import React from 'react';
-
+export const ItemContext = React.createContext(null);
+import {useState} from 'react';
 import Todo from './Components/Todo';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Todo />
-    );
-  }
-}
+const App =() => {
+    const [list, setList] = useState([
+      {
+        text: 'Lecture',
+        assignee: 'Emily',
+        difficulty: 3,
+        complete: false
+      },
+      {
+        text: 'Meeting',
+        assignee: 'Jimbob',
+        difficulty: 10,
+        complete: false
+      },
+      {
+        text: 'Lab',
+        assignee: 'Josh',
+        difficulty: 8,
+        complete: false
+      },
+    ]);
 
+    return (
+      <ItemContext.Provider value={{list, setList}}>
+        {/* <Header /> */}
+        <Todo />
+        {/* <Footer /> */}
+      </ItemContext.Provider>
+    );
+};
+
+export default App;
 
 // import React from 'react';
 // import Todo from './Components/Todo';
