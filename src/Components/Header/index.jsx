@@ -1,14 +1,15 @@
-// import {UserContext} from './App';
+// import {ItemContext} from './App';
 // import LoginButton from '../LoginButton';
 // import { useContext } from 'react';
+import { Typography } from "@mui/material";
 
-// const Header = () => {
-//   const user = useContext(UserContext);
-//   return (
-//     <><div style={{ display: 'flex', justifyContent: 'space-between' }} /><h1>Hello World</h1></>
-//     // {!user.name && <LoginButton/>}
-//     // {user.name && <p>Welcome {user.name}</p>}
-//   );
-// };
+const Header = (incomplete) => {
+  // const user = useContext(ItemContext);
+  return (
+    <header data-testid="todo-header">
+    <Typography variant="h2" gutterBottom data-testid="todo-h3">To Do List: {incomplete.length} items pending</Typography>
+  </header>
+  );
+};
 
-// export default Header;
+export default Header;

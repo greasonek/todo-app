@@ -1,17 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
-import { ItemContext } from '../../App';
+// import { ItemContext } from '../../App';
 import { v4 as uuid } from 'uuid';
+import TodoList from '../List';
+import Header from "../Header";
+import TodoForm from "../TodoForm";
+import starterData from './starterData.json';
+// import {Button, Typography, Pagination} from '@mui/material';
+
 
 const Todo = () => {
-
-  const { list, setList } = useContext(ItemContext)
   const [defaultValues] = useState({
     difficulty: 4,
   });
+  const [list, setList] = useState(starterData)
 
   const [incomplete, setIncomplete] = useState([]);
-  const [showCompleted, setShowCompleted] = useState(true);
+  // const [showCompleted, setShowCompleted] = useState(true);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -28,22 +33,23 @@ const Todo = () => {
 
   function toggleComplete(id) {
 
-    const items = list.map( item => {
+    const items = list.map( (item) => {
       if ( item.id === id ) {
         item.complete = ! item.complete;
       }
       return item;
     });
-
+    const newIncomplete = items.filter((it) => !it.complete)
+    setIncomplete(newIncomplete);
     setList(items);
 
   }
 
   useEffect(() => {
 
-    let incompleteCount = list.filter(item => !item.complete).length;
+    let incompleteCount = list.filter((item) => !item.complete);
     setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
+    document.title = `To Do List: ${incomplete.length}`;
     // linter will want 'incomplete' added to dependency array unnecessarily. 
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
@@ -51,43 +57,20 @@ const Todo = () => {
 
   return (
     <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete.length} items pending</h1>
-      </header>
+      <Header incomplete = {incomplete}/> 
   
-      <form onSubmit={handleSubmit}>
+      <TodoForm 
+        handleChange={handleChange} 
+        handleSubmit={handleSubmit} 
+        defaultValues={defaultValues}
+        deleteItem={deleteItem}
+      />
 
-        <h2>Add To Do Item</h2>
-
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
-
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
-
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
-
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
+      <TodoList 
+        list={list} 
+        toggleComplete={toggleComplete} 
+        incomplete = {incomplete}
+      />
 
     </>
   );
