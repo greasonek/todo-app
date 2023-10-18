@@ -8,13 +8,13 @@ import { createTheme } from '@mui/material/styles';
 export const darkMode = createTheme ({
     palette: {
       primary: {
-        main: '#004d40',
+        main: '#263238',
       },
       secondary: {
-        main: '#689f38',
+        main: '#263238',
       },
       background: {
-        default: '#bfc355',
+        default: '#eceff1',
       },
     },
 })

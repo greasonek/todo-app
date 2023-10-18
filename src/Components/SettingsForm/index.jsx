@@ -1,16 +1,13 @@
 import { useContext, useState } from 'react'
-import { Button, FormControlLabel, Switch } from "@mui/material";
+import { Button, FormControlLabel, Switch, Typography, Card } from "@mui/material";
 import { ItemContext } from '../../App';
+import { Link } from "react-router-dom";
 
 
 const SettingsForm = () => {
-  const {changeCount, displayCount} = useContext(ItemContext);
+  const {changeCount, displayCount, toggleShowHide, showHide, changeSortWord, sortKeyWord} = useContext(ItemContext);
   const [inputValue, setInputValue] = useState(displayCount);
-
-  const {toggleShowHide, showHide} = useContext(ItemContext);
   const [showChoice, setShowChoice] = useState(false);
-
-  const {changeSortWord, sortKeyWord} = useContext(ItemContext);
 
 const handleDisplayCountChange = () => {
   localStorage.setItem('itemCount', inputValue)
@@ -33,9 +30,13 @@ const handleChange =(e) => {
 }
 
   return (
+    <Card variant="outlined" style={{width: 500, height: 300, margin: 50, padding: 10}}>
+      <Link to={'/'}>
+        <Typography variant="h5" gutterBottom>Home</Typography>
+      </Link>
     <form>
-    {/* <Typography variant="h5" gutterBottom>Update Settings</Typography> */}
 
+        
     <label>
       <span>Items Per Page</span>
       <input 
@@ -61,7 +62,7 @@ const handleChange =(e) => {
     </FormControlLabel>
 
     </form>
-    
+    </Card>
   )
 }
 

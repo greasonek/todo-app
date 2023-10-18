@@ -1,25 +1,15 @@
-import { createContext, useState, useEffect } from 'react';
 import Todo from './Components/Todo';
-// import { DarkModeIcon, LightModeIcon } from '@mui/icons-material';
+import SettingsForm from './Components/SettingsForm';
+import { createContext, useState, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkMode } from './Components/Theme/dark-mode';
 import {lightMode} from './Components/Theme/light-mode';
 import CssBaseline from '@mui/material/CssBaseline';
-// import { ReactDOM } from 'react-dom/client';
-// import { BrowserRouter as Router, Routes } from 'react-router-dom';
-// import SettingsForm from './Components/SettingsForm';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Auth from './Components/Auth/auth';
+import Login from './Components/Auth/login';
+import LoginContext from './Components/Auth/context';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <Router>
-//       <Routes>
-//         <Route exact path='/' element={<App/>} />
-//         <Route path='/settings' element={<SettingsForm/>} />
-//       </Routes>
-//     </Router>
-//   </React.StrictMode>
-// )
 
 export const ItemContext = createContext(null);
 
@@ -70,13 +60,36 @@ const App =() => {
           setSortKeyWord(sortKeyword),
       }}>
         <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
-          <CssBaseline/>
-          <Todo />
+            <CssBaseline/>
+            <LoginContext>
+            <Login />
+            <Auth>
+            <div>Any valid user can see this</div>
+            </Auth>
+
+            <Auth capability="create">
+              <div>Users with create access can see this</div>
+            </Auth>
+
+            <Auth capability="update">
+              <div>Users with update access can see this</div>
+            </Auth>
+
+            <Auth capability="delete">
+              <div>Users with delete access can see this</div>
+            </Auth>
+          </LoginContext>
+            
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Todo/>}/>
+              <Route path = '/settings' element={<SettingsForm/>}/>
+            </Routes>
+          </BrowserRouter>
+
         </ThemeProvider>
-
-
       </ItemContext.Provider>
     );
-};
+  };
 
 export default App;

@@ -1,14 +1,14 @@
 import React from 'react'
-import { Typography, Button } from '@mui/material'
+import { Typography, Button, Card } from '@mui/material'
 
 const TodoForm = ({handleChange, handleSubmit, defaultValues}) => {
   return (
+    <Card variant="outlined" style={{width: 500, height: 300, margin: 50, padding: 10}}>{
     <form onSubmit={handleSubmit}>
 
-    <Typography variant="h3" gutterBottom>Add To Do Item</Typography>
-
+    <Typography variant="h4" gutterBottom>Add To Do Item</Typography>
     <label>
-      <span>To Do Item</span>
+      <span style={{margin: 10, padding: 3}}>To Do Item</span>
       <input onChange={handleChange} 
       name="text" 
       type="text" 
@@ -16,7 +16,7 @@ const TodoForm = ({handleChange, handleSubmit, defaultValues}) => {
     </label>
 
     <label>
-      <span>Assigned To</span>
+      <span style={{margin: 10, padding: 3}}>Assigned To</span>
       <input 
         onChange={handleChange} 
         name="assignee" 
@@ -25,7 +25,7 @@ const TodoForm = ({handleChange, handleSubmit, defaultValues}) => {
     </label>
 
     <label>
-      <span>Difficulty</span>
+      <span style={{margin: 10, padding: 3}}>Difficulty</span>
       <input 
         onChange={handleChange} 
         defaultValue={defaultValues.difficulty} 
@@ -36,10 +36,11 @@ const TodoForm = ({handleChange, handleSubmit, defaultValues}) => {
     </label>
 
     <label>
-      <Button type="submit" variant='contained' color='success'>Add Item</Button>
+      <Button type="submit" variant='contained' color='secondary' style={{margin: 10, padding: 3}}>Add Item</Button>
   
     </label>
   </form>
+}</Card>
   )
 }
 

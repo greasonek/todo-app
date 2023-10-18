@@ -1,12 +1,9 @@
-// import LoginButton from '../LoginButton';
 import { Typography, Button } from "@mui/material";
 import  LightModeIcon from "@mui/icons-material/LightMode";
 import  DarkModeIcon from "@mui/icons-material/DarkMode";
 import { ItemContext } from '../../App/';
 import { useContext } from 'react';
-import SettingsForm from "../SettingsForm";
-import useForm from "../../hooks/form";
-import TodoForm from "../TodoForm";
+import { Link } from "react-router-dom";
 
 
 const Header = ({incomplete}) => {
@@ -19,32 +16,25 @@ const Header = ({incomplete}) => {
 
   return (
     <>
-      <header
-        data-testid="todo-header"
-        style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="h2" gutterBottom data-testid="todo-h3">To Do List: {incomplete.length} items pending</Typography>
         
-        <Button onClick={TodoForm}>
-        <Typography variant="h5" gutterBottom>Home</Typography>
-        </Button>
+        <Link to={'/'}>
+        <Typography variant="h5" gutterBottom style={{margin:10}}>Home</Typography>
+        </Link>
         
-        <Button onClick={SettingsForm}>
-        <Typography variant="h5" gutterBottom>Settings</Typography>
-        </Button>
+        <Link to={'/settings'}>
+        <Typography variant="h5" gutterBottom style={{margin:10}}>Settings</Typography>
+        </Link>
 
         <Button onClick={handleThemeClick}>
           {appTheme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
         </Button>
+      <header
+        data-testid="todo-header"
+        style={{ display: 'flex', justifyContent: 'space-between', background: '#263238', color: '#eceff1', margin: 20 }}>
+        <Typography variant="h2" gutterBottom data-testid="todo-h3">To Do List: {incomplete.length} items pending</Typography>
 
-
-        {<SettingsForm/>}
       </header>
-      
-      {/* <SettingsForm 
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      /> */}
-    
+   
     </>
   );
 };
