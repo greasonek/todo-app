@@ -1,10 +1,8 @@
-// import React from "react";
 import { ItemContext } from '../../App';
 import { useContext, useState, useMemo, useEffect } from 'react';
-import { Pagination } from "@mui/material";
+import { Pagination, Card } from "@mui/material";
 
 const TodoList = ({list, toggleComplete, incomplete}) => {
-  // put all items when created in incomplete, once checked complete - remove them
 const {showHide, defaultCount} = useContext(ItemContext);
 const [count, setCount] = useState(0)
 const [page, setPage] = useState(1);
@@ -36,8 +34,8 @@ const listToUse = useMemo(() => {
 
   return (
     <>
-          {listToUse.slice(startInd, endInd).map((item) => (
-
+    <Card variant="outlined" style={{width: 500, height: 900, margin: 50, padding: 10}}>
+      {listToUse.slice(startInd, endInd).map((item) => (
         <div key={item.id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
@@ -46,7 +44,8 @@ const listToUse = useMemo(() => {
           <hr />
         </div>
           ))}
-          <Pagination count ={count} onChange={handlePageChange} />
+    </Card>
+          <Pagination count ={count} onChange={handlePageChange} style={{margin: 10, padding: 10}} />
     </>
   )
 }
