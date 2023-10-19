@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Auth from './Components/Auth/auth';
 import Login from './Components/Auth/login';
 import LoginContext from './Components/Auth/context';
+import TodoForm from './Components/TodoForm';
+import AccessDenied from './Components/AccessDenied';
 
 
 export const ItemContext = createContext(null);
@@ -61,32 +63,47 @@ const App =() => {
       }}>
         <ThemeProvider theme={appTheme === 'light' ? lightMode : darkMode}>
             <CssBaseline/>
+
             <LoginContext>
-            <Login />
-            <Auth>
-            <div>Any valid user can see this</div>
-            </Auth>
+              <Login />
+              
+              <Auth>
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/' element={<Todo/>}/>
+                  <Route path='/settings' element={<AccessDenied/>}/>
+                </Routes>
+              </BrowserRouter>
+              </Auth>
 
-            <Auth capability="create">
-              <div>Users with create access can see this</div>
-            </Auth>
+              <Auth capability="create">
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/' element={<Todo/>}/>
+                  <Route path = '/settings' element={<AccessDenied/>}/>
+                </Routes>
+              </BrowserRouter>
+              </Auth>
+          
+              <Auth capability="update">
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/' element={<Todo/>}/>
+                  <Route path = '/settings' element={<SettingsForm/>}/>
+                </Routes>
+              </BrowserRouter>
+              </Auth>
 
-            <Auth capability="update">
-              <div>Users with update access can see this</div>
-            </Auth>
+              <Auth capability="delete">
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/' element={<Todo/>}/>
+                  <Route path = '/settings' element={<SettingsForm/>}/>
+                </Routes>
+              </BrowserRouter>
+              </Auth>
 
-            <Auth capability="delete">
-              <div>Users with delete access can see this</div>
-            </Auth>
           </LoginContext>
-            
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Todo/>}/>
-              <Route path = '/settings' element={<SettingsForm/>}/>
-            </Routes>
-          </BrowserRouter>
-
         </ThemeProvider>
       </ItemContext.Provider>
     );
