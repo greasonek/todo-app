@@ -29,15 +29,52 @@ const handleChange =(e) => {
   setShowChoice(e.target.value);
 }
 
+const cardStyle = {
+  width: '100%', // Adjust the width as needed
+  padding: '20px',
+  marginBottom: '20px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+  borderRadius: '8px',
+};
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'black',
+};
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
+const labelStyle = {
+  margin: '10px 0',
+};
+
+const inputStyle = {
+  padding: '5px',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+};
+
+const buttonStyle = {
+  marginTop: '10px',
+};
+
+const switchStyle = {
+  marginTop: '10px',
+};
+
+
   return (
-    <Card variant="outlined" style={{width: 500, height: 300, margin: 50, padding: 10}}>
-      <Link to={'/'}>
+    <Card variant="outlined" style={cardStyle}>
+      <Link to={'/'} style={linkStyle}>
         <Typography variant="h5" gutterBottom>Home</Typography>
       </Link>
-    <form>
 
-        
-    <label>
+    <form style={formStyle}>   
+    <label style={labelStyle}>
       <span>Items Per Page</span>
       <input 
         value={inputValue}
@@ -45,7 +82,7 @@ const handleChange =(e) => {
         type='number'
         placeholder={1}/>
     </label>
-    <label>
+    <label style={labelStyle}>
       <span>Sort Keyword</span>
       <input
         onChange={handleSortWordChange}
@@ -57,11 +94,11 @@ const handleChange =(e) => {
       Show New Settings
     </Button>
 
-    <FormControlLabel value={showHide} control={<Switch defaultChecked />} label ='Hide Completed To Dos' onChange={handleToggleShowHide}>
+    <FormControlLabel value={showHide} control={<Switch defaultChecked />} label ='Hide Completed To Dos' onChange={handleToggleShowHide} style={switchStyle}>
           {/* {showHide === 'show' ? 'hide' : 'show'} */}
     </FormControlLabel>
-
     </form>
+    
     </Card>
   )
 }

@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
 import {When} from 'react-if';
+import { Button } from "@mui/material";
+import Header from '../Header/index.jsx';
 
 import { LoginContext } from './context.jsx';
 
@@ -18,9 +20,11 @@ const Login = () => {
 
     return (
       <>
+  
         <When condition={context.loggedIn}>
-          <button onClick={context.logout}>Log Out</button>
+          <Button onClick={context.logout} variant='contained' color='error'>Log Out</Button>
         </When>
+    
 
         <When condition={!context.loggedIn}>
           <form onSubmit={handleSubmit}>

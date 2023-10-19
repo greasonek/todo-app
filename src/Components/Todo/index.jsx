@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
-// import { ItemContext } from '../../App';
 import { v4 as uuid } from 'uuid';
 import TodoList from '../List';
 import Header from "../Header";
 import TodoForm from "../TodoForm";
 import starterData from './starterData.json';
-// import {Button, Typography, Pagination} from '@mui/material';
-
+import Auth from '../Auth/auth';
 
 const Todo = () => {
   const [defaultValues] = useState({
@@ -16,7 +14,6 @@ const Todo = () => {
   const [list, setList] = useState(starterData)
 
   const [incomplete, setIncomplete] = useState([]);
-  // const [showCompleted, setShowCompleted] = useState(true);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -55,10 +52,17 @@ const Todo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);  
 
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center', 
+  };
+
   return (
     <>
       <Header incomplete = {incomplete}/> 
-  
+
+    <div style={containerStyle}>
       <TodoForm 
         handleChange={handleChange} 
         handleSubmit={handleSubmit} 
@@ -71,7 +75,7 @@ const Todo = () => {
         toggleComplete={toggleComplete} 
         incomplete = {incomplete}
       />
-
+      </div>
     </>
   );
 };
