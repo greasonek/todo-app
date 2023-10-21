@@ -39,6 +39,13 @@ const App =() => {
     setSortKeyWord(search);
   }, [])
 
+  // const getSettingsElement = () => {
+  //   if(capability('update','delete')) {
+  //     return <SettingsForm/>;
+  //   } else {
+  //     return <AccessDenied/>;
+  //   }
+  // }
 
     return (
       <ItemContext.Provider 

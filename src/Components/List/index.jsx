@@ -34,13 +34,16 @@ const listToUse = useMemo(() => {
 
   return (
     <>
-    <Card variant="outlined"  style={{
-    width: 500,
-    margin: 50,
-    padding: 10,
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', // Add a box shadow
-    borderRadius: '8px', // Add rounded corners
-  }}>
+    <Card variant="outlined"  
+      style={{
+        width: 500,
+        margin: 10,
+        marginTop: 10,
+        padding: 10,
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)', 
+        borderRadius: '8px', 
+      }}>
+        
       {listToUse.slice(startInd, endInd).map((item) => (
         <div key={item.id}>
           <p>{item.text}</p>

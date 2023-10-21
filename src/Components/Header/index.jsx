@@ -4,6 +4,8 @@ import  DarkModeIcon from "@mui/icons-material/DarkMode";
 import { ItemContext } from '../../App/';
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
+// import LoginProvider from "../Auth/context";
+// import Login from "../Auth/login";
 
 const Header = ({incomplete}) => {
   const {toggleTheme, appTheme} = useContext(ItemContext);
@@ -15,13 +17,11 @@ const Header = ({incomplete}) => {
 
   const headerContainerStyle = {
     display: 'flex',
-    // justifyContent: 'space-between',
     background: '#263238',
     color: '#eceff1',
     margin: '20px',
-    alignItems: 'center', // Align items vertically
+    alignItems: 'center',
     padding: '10px',
-    // position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
@@ -29,7 +29,6 @@ const Header = ({incomplete}) => {
 
   const linkStyle = {
     textDecoration: 'none',
-    color: 'black',
     margin: 5,
     color: '#eceff1'
   };
@@ -50,7 +49,7 @@ const Header = ({incomplete}) => {
         <Button onClick={handleThemeClick}>
           {appTheme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
         </Button>
-
+  
 
       </header>
         <Typography 
@@ -58,13 +57,16 @@ const Header = ({incomplete}) => {
           gutterBottom 
           data-testid="todo-h3" 
           style={{
-            margin: 20, 
+            display: 'flex',
+            justifyContent: 'center',
+            margin: 'auto', 
             background:'#263238', 
             color: '#eceff1', 
-            padding: 8 
+            padding: 8,
+            width: 1000,
           }}>To Do List: {incomplete.length} items pending
         </Typography>
-   
+
     </>
   );
 };

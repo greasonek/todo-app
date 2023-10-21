@@ -3,21 +3,22 @@ import { Typography, Button, Card } from '@mui/material'
 
 const cardStyle = {
   width: 500,
-  height: 300,
-  margin: 50,
-  padding: 10,
+  // height: 800,
+  margin: 10,
+  padding: 20,
+  position: 'sticky',
 };
 
 const labelStyle = {
   margin: '10px',
-  padding: '3px',
+  padding: '5px',
 };
 
 const inputStyle = {
   padding: '5px',
   border: '1px solid #ccc',
   borderRadius: '4px',
-  width: '100%', // To ensure the input fields expand to fill the available space
+  width: '100%',
 };
 
 const buttonLabelStyle = {
@@ -26,7 +27,7 @@ const buttonLabelStyle = {
 };
 
 const buttonStyle = {
-  width: '100%', // To make the button full-width
+  width: 'auto', // To make the button full-width
 };
 
 
