@@ -4,13 +4,11 @@ import { Typography } from "@mui/material";
 
 const headerContainerStyle = {
   display: 'flex',
-  // justifyContent: 'space-between',
   background: '#263238',
   color: '#eceff1',
   margin: '20px',
-  alignItems: 'center', // Align items vertically
+  alignItems: 'center', 
   padding: '10px',
-  // position: 'fixed',
   top: 0,
   left: 0,
   right: 0,
@@ -18,7 +16,6 @@ const headerContainerStyle = {
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'black',
   margin: 5,
   color: '#eceff1'
 };

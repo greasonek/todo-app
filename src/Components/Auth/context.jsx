@@ -83,6 +83,8 @@ const LoginProvider = (props) => {
     validateToken(token);
   }, [state.user.name, validateToken]);
 
+  
+
   return (
     <LoginContext.Provider value={{ ...state, can: can, login: login, logout: logout }}>
       {props.children}
