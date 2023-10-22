@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { Button, FormControlLabel, Switch, Typography, Card } from "@mui/material";
 import { ItemContext } from '../../App';
 import { Link } from "react-router-dom";
+import Auth from '../Auth/auth';
 
 
 const SettingsForm = () => {
@@ -68,6 +69,7 @@ const switchStyle = {
 
 
   return (
+    <Auth>
     <Card variant="outlined" style={cardStyle}>
       <Link to={'/'} style={linkStyle}>
         <Typography variant="h5" gutterBottom>Home</Typography>
@@ -98,8 +100,8 @@ const switchStyle = {
           {/* {showHide === 'show' ? 'hide' : 'show'} */}
     </FormControlLabel>
     </form>
-    
     </Card>
+    </Auth>
   )
 }
 

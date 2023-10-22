@@ -74,16 +74,16 @@ const App =() => {
             <LoginContext>
               <Login />
               
-              <Auth>
+             
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<Todo/>}/>
-                  <Route path='/settings' element={<AccessDenied/>}/>
+                  <Route path='/settings' element={<SettingsForm/>}/>
                 </Routes>
               </BrowserRouter>
-              </Auth>
+              
 
-              <Auth capability="create">
+              {/* <Auth capability="create">
               <BrowserRouter>
                 <Routes>
                   <Route path='/' element={<Todo/>}/>
@@ -108,7 +108,7 @@ const App =() => {
                   <Route path = '/settings' element={<SettingsForm/>}/>
                 </Routes>
               </BrowserRouter>
-              </Auth>
+              </Auth> */}
 
           </LoginContext>
         </ThemeProvider>
