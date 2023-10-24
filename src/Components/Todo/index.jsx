@@ -19,6 +19,7 @@ const Todo = () => {
 
   async function makeRequest(config) {
     const response = await axios(config);
+    console.log(response);
     return response.data;
   }
 
@@ -46,8 +47,16 @@ const Todo = () => {
   
 }
 
-  function deleteItem(id) {
+  async function deleteItem(id) {
     // this will only be visible to admins
+    
+    const config = {
+      method: 'delete',
+      baseURL: 'https://bearer-auth-lab34.onrender.com',
+      url: `/todo/${id}`,
+      // data: item,
+    };
+    const data = await makeRequest(config)
     const items = list.filter( item => item.id !== id );
     setList(items);
   }
