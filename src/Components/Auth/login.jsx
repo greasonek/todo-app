@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 // import {When} from 'react-if';
 import { Button } from "@mui/material";
 import Header from '../Header/index.jsx';
+import axios from 'axios';
 
 import { LoginContext } from './context.jsx';
 
@@ -18,6 +19,22 @@ const Login = () => {
     context.login(state.username, state.password);
   };
 
+  const signup = async (e) => {
+    e.preventDefault();
+    const config = {
+      baseURL:'https://bearer-auth-lab34.onrender.com',
+      url: '/signup',
+      method: 'post',
+      data: state,
+    }
+    try {
+      const response = await axios(config);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const headerContainerStyle = {
     display: 'flex',
     background: '#263238',
@@ -30,11 +47,11 @@ const Login = () => {
     right: 0,
   };
 
-  const linkStyle = {
-    textDecoration: 'none',
-    background: '#eceff1',
-    margin: 5,
-    color: '#263238'
+  const buttonStyle = {
+    margin: '3px', 
+    backgroundColor: '#eceff1',
+    color: '#263238',
+    padding:'5px' 
   };
 
   const labelStyle = {
@@ -49,10 +66,6 @@ const Login = () => {
         <Button onClick={context.logout} variant='contained' color='error'>Log Out</Button>
       </div> }
 
-      {/* <When condition={context.loggedIn}>
-          <Button onClick={context.logout} variant='contained' color='error'>Log Out</Button>
-        </When>
-       */}
       <header style={headerContainerStyle}>
         {!context.loggedIn &&
            <form onSubmit={handleSubmit}>
@@ -68,7 +81,10 @@ const Login = () => {
             name="password"
             onChange={handleChange}
           />
-          <button >Login</button>
+          <div>
+          <Button style={buttonStyle} type='submit'>Login</Button>
+          <Button style={buttonStyle} onClick={signup} type='button'>Sign Up</Button>
+          </div>
         </form>  
         }
       </header>
@@ -77,21 +93,4 @@ const Login = () => {
 };
 
 export default Login;
-        {/* <When condition={!context.loggedIn}>
-          <form onSubmit={handleSubmit}>
-            <input
-              style={labelStyle}
-              placeholder="UserName"
-              name="username"
-              onChange={handleChange}
-            />
-            <input
-              style={labelStyle}
-              placeholder="password"
-              name="password"
-              onChange={handleChange}
-            />
-          <button >Login</button>            
-          {/* <Button style={linkStyle}>Login</Button> */}
-          {/* </form> */}
-        
+
