@@ -1,8 +1,9 @@
 import { ItemContext } from '../../App';
 import { useContext, useState, useMemo, useEffect } from 'react';
-import { Pagination, Card } from "@mui/material";
+import { Pagination, Card, Button } from "@mui/material";
+import Auth from '../Auth/auth';
 
-const TodoList = ({list, toggleComplete, incomplete}) => {
+const TodoList = ({list, toggleComplete, incomplete, deleteItem}) => {
 const {showHide, defaultCount} = useContext(ItemContext);
 const [count, setCount] = useState(0)
 const [page, setPage] = useState(1);
@@ -49,7 +50,12 @@ const listToUse = useMemo(() => {
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
+          <Auth capability={'update'}>
           <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
+          </Auth>
+          <Auth capability={'delete'}>
+          <Button variant='contained' onClick={() => deleteItem(item.id)}>Delete</Button>
+          </Auth>
           <hr />
         </div>
           ))}

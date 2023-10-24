@@ -6,6 +6,7 @@ import Header from "../Header";
 import TodoForm from "../TodoForm";
 import starterData from './starterData.json';
 import Auth from '../Auth/auth';
+import axios from 'axios';
 
 const Todo = () => {
   const [defaultValues] = useState({
@@ -16,20 +17,52 @@ const Todo = () => {
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem(item) {
-    item.id = uuid();
-    item.complete = false;
-    console.log(item);
-    setList([...list, item]);
+  async function makeRequest(config) {
+    const response = await axios(config);
+    console.log(response);
+    return response.data;
   }
 
-  function deleteItem(id) {
+  useEffect(() => {
+    (async () => {
+      const items = await axios.get('https://bearer-auth-lab34.onrender.com/todo');
+      setList(items.data);
+    })();
+  }, []);
+   
+  async function addItem(item) {
+    // item.id = uuid();
+    item.complete = false;
+    console.log(item);
+    // setList([...list, item]);
+    const config = {
+      method: 'post',
+      baseURL: 'https://bearer-auth-lab34.onrender.com',
+      url: '/todo',
+      data: item,
+    };
+     const data = await makeRequest(config)
+     if(data) setList([...list, data]);
+     console.log(data);
+  
+}
+
+  async function deleteItem(id) {
+    // this will only be visible to admins
+    
+    const config = {
+      method: 'delete',
+      baseURL: 'https://bearer-auth-lab34.onrender.com',
+      url: `/todo/${id}`,
+      // data: item,
+    };
+    const data = await makeRequest(config)
     const items = list.filter( item => item.id !== id );
     setList(items);
   }
 
   function toggleComplete(id) {
-
+// this function is gated by auth
     const items = list.map( (item) => {
       if ( item.id === id ) {
         item.complete = ! item.complete;
@@ -63,17 +96,20 @@ const Todo = () => {
       <Header incomplete = {incomplete}/> 
 
     <div style={containerStyle}>
+      <Auth capability = {'create'}>
       <TodoForm 
         handleChange={handleChange} 
         handleSubmit={handleSubmit} 
         defaultValues={defaultValues}
         deleteItem={deleteItem}
       />
+      </Auth>
 
       <TodoList 
         list={list} 
         toggleComplete={toggleComplete} 
         incomplete = {incomplete}
+        deleteItem={deleteItem}
       />
       </div>
     </>
